@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 - Erreur serveur - Arctic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+</head>
+
+<body style="background: linear-gradient(135deg, #FBF8F3 0%, #F9FAFB 100%); min-height: 100vh; display: flex; flex-direction: column;">
+
+    <!-- Motifs mixtes décoratifs -->
+    <div class="pattern-african-mudcloth" style="position: fixed; top: -100px; right: -100px; width: 500px; height: 500px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+    <div class="pattern-zen-rings" style="position: fixed; bottom: -80px; left: -80px; width: 400px; height: 400px; opacity: 0.03; pointer-events: none; z-index: 0;"></div>
+
+    <header class="navbar" style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem;">
+            <a href="{{ url_for('accueil') }}" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">
+                Arctic
+            </a>
+        </div>
+    </header>
+
+    <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; position: relative; z-index: 1;">
+        
+        <div class="card" style="max-width: 600px; padding: 4rem 3rem; text-align: center; position: relative; overflow: hidden;">
+            
+            <div class="pattern-african-diamond" style="position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; opacity: 0.04;"></div>
+
+            <div style="position: relative; z-index: 2;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem;">⚠️</div>
+
+                <h1 style="font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                    500
+                </h1>
+
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: #1F2937; margin-bottom: 1.5rem;">
+                    Erreur serveur
+                </h2>
+
+                <p style="color: #6B7280; font-size: 1.125rem; line-height: 1.6; margin-bottom: 2rem;">
+                    Une erreur s'est produite sur le serveur. Nos équipes ont été informées et travaillent à résoudre le problème. Veuillez réessayer dans quelques instants.
+                </p>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="{{ url_for('accueil') }}" class="btn btn-primary" style="padding: 0.875rem 2rem;">
+                        ← Retour à l'accueil
+                    </a>
+                    <a href="javascript:location.reload()" class="btn btn-outline" style="padding: 0.875rem 2rem;">
+                        Réessayer
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="footer" style="background: var(--neutral-900); color: var(--neutral-200); padding: 2rem; text-align: center; position: relative; z-index: 1;">
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9375rem;">© 2026 Arctic — L'art mérite d'être découvert.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

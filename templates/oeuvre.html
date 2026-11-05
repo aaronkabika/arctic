@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ oeuvre['titre'] }} - Arctic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/oeuvre.css') }}">
+
+    <style>
+        .artwork-media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: 1rem;
+            width: 100%;
+        }
+        .artwork-media-image {
+            display: block;
+            width: 100%;
+            max-height: 520px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .artwork-media-audio {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .artwork-file-note {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .artwork-visual {
+            min-width: 0;
+        }
+    </style>
+</head>
+
+<body class="artwork-page">
+    <!-- EN-TÊTE -->
+    <header class="artist-header">
+        <a class="artist-logo" href="{{ url_for('accueil') }}" aria-label="Arctic — Accueil">
+            <span>Arctic</span>
+        </a>
+
+        <nav class="artist-nav" aria-label="Navigation principale">
+            <a href="{{ url_for('accueil') }}">Accueil</a>
+            <a href="{{ url_for('explorer') }}">Explorer</a>
+            <a href="{{ url_for('espace') }}">Mon espace</a>
+            <a href="{{ url_for('profil_visiteur') }}">Mon profil</a>
+            <a href="{{ url_for('deconnexion') }}">Déconnexion</a>
+        </nav>
+    </header>
+
+    <main class="artwork-main">
+        <div class="artwork-back">
+            <a href="{{ url_for('explorer') }}">← Retour à Explorer</a>
+        </div>
+
+        <section class="artwork-detail" aria-labelledby="artwork-title">
+            <div class="artwork-visual">
+                {% set images = fichiers | selectattr('type_fichier', 'equalto', 'image') | list %}
+                {% set audios = fichiers | selectattr('type_fichier', 'equalto', 'audio') | list %}
+                {% set documents = fichiers | selectattr('type_fichier', 'equalto', 'document') | list %}
+
+                {% if images %}
+                    <div class="artwork-media-gallery" aria-label="Images de l’œuvre">
+                        {% for fichier in images %}
+                            <img
+                                class="artwork-media-image"
+                                src="{{ url_for('afficher_fichier_oeuvre', fichier_id=fichier['id']) }}"
+                                alt="Image {{ loop.index }} de {{ oeuvre['titre'] }}"
+                                loading="lazy"
+                                decoding="async">
+                        {% endfor %}
+                    </div>
+                {% elif oeuvre['type'] == 'musique' %}
+                    <div class="artwork-placeholder" aria-hidden="true">🎵</div>
+                {% elif oeuvre['type'] == 'litterature' %}
+                    <div class="artwork-placeholder" aria-hidden="true">📖</div>
+                {% elif oeuvre['type'] == 'sculpture' %}
+                    <div class="artwork-placeholder" aria-hidden="true">🗿</div>
+                {% else %}
+                    <div class="artwork-placeholder" aria-hidden="true">🎨</div>
+                {% endif %}
+
+                {% if audios %}
+                    {% for fichier in audios %}
+                        <audio class="artwork-media-audio" controls preload="metadata">
+                            <source src="{{ url_for('afficher_fichier_oeuvre', fichier_id=fichier['id']) }}">
+                            Votre navigateur ne peut pas lire ce fichier audio.
+                        </audio>
+                    {% endfor %}
+                {% endif %}
+
+                {% if documents %}
+                    <div class="artwork-file-note">
+                        <p>Cette œuvre contient un document littéraire. Pour le consulter, contactez l’artiste grâce aux coordonnées ci-dessous.</p>
+                    </div>
+                {% endif %}
+
+                {% if not fichiers %}
+                    <p class="artwork-file-note">Aucun fichier n’a encore été ajouté à cette œuvre.</p>
+                {% endif %}
+
+                <span class="artwork-type">
+                    {% if oeuvre['type'] == 'musique' %}Musique
+                    {% elif oeuvre['type'] == 'peinture' %}Peinture &amp; dessin
+                    {% elif oeuvre['type'] == 'litterature' %}Littérature
+                    {% elif oeuvre['type'] == 'sculpture' %}Sculpture
+                    {% else %}{{ oeuvre['type'] }}{% endif %}
+                </span>
+            </div>
+
+            <div class="artwork-information">
+                <p class="small-title">ŒUVRE ARCTIC</p>
+                <h1 id="artwork-title">{{ oeuvre['titre'] }}</h1>
+
+                <p class="artwork-description">
+                    {{ oeuvre['description'] or 'Aucune description fournie pour cette œuvre.' }}
+                </p>
+
+                <div class="artwork-price-box">
+                    <span>Prix</span>
+                    <strong>{{ '%.2f'|format(oeuvre['prix']) }} $</strong>
+                </div>
+
+                <div class="artwork-meta">
+                    <div class="artwork-meta-item">
+                        <small>Type</small>
+                        <strong>
+                            {% if oeuvre['type'] == 'musique' %}Musique
+                            {% elif oeuvre['type'] == 'peinture' %}Peinture &amp; dessin
+                            {% elif oeuvre['type'] == 'litterature' %}Littérature
+                            {% elif oeuvre['type'] == 'sculpture' %}Sculpture
+                            {% else %}{{ oeuvre['type'] }}{% endif %}
+                        </strong>
+                    </div>
+                    <div class="artwork-meta-item">
+                        <small>Date de création</small>
+                        <strong>{{ oeuvre['date_creation'] }}</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÉSENTATION DE L'ARTISTE -->
+        <section class="artwork-artist-section" aria-labelledby="artist-section-title">
+            <div class="section-heading">
+                <p>L’ARTISTE</p>
+                <h2 id="artist-section-title">À propos du créateur</h2>
+            </div>
+
+            <div class="artwork-artist-card">
+                <div class="artist-card-avatar">
+                    <div class="avatar-placeholder" aria-hidden="true">👤</div>
+                </div>
+                <div class="artist-card-content">
+                    <h3>{{ oeuvre['artiste_nom'] }}</h3>
+                    <p>Découvrez les créations et l’univers artistique de {{ oeuvre['artiste_nom'] }}.</p>
+                    <a href="{{ url_for('profil_artiste', artiste_id=oeuvre['artiste_id']) }}"
+                       class="secondary-button">
+                        Voir le profil →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT DE L'ARTISTE -->
+        <section class="artwork-contact" aria-labelledby="artwork-contact-title">
+            <div class="contact-content">
+                <p>CETTE ŒUVRE VOUS INTÉRESSE ?</p>
+                <h2 id="artwork-contact-title">Contactez directement l’artiste</h2>
+                <span>
+                    Pour acheter cette œuvre ou obtenir davantage d’informations,
+                    contactez directement son créateur.
+                </span>
+            </div>
+
+            <div class="contact-actions">
+                {% if oeuvre['artiste_telephone'] %}
+                    <a href="tel:{{ oeuvre['artiste_telephone'] }}"
+                       class="contact-button" aria-label="Appeler l’artiste">
+                        <span aria-hidden="true">📞</span> Appeler
+                    </a>
+                {% endif %}
+                {% if oeuvre['artiste_email'] %}
+                    <a href="mailto:{{ oeuvre['artiste_email'] }}"
+                       class="contact-button" aria-label="Envoyer un e-mail à l’artiste">
+                        <span aria-hidden="true">✉️</span> E-mail
+                    </a>
+                {% endif %}
+                {% if not oeuvre['artiste_telephone'] and not oeuvre['artiste_email'] %}
+                    <p>Les coordonnées de cet artiste ne sont pas encore disponibles.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="artist-footer">
+        <p>© 2026 Arctic — L’art mérite d’être découvert.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

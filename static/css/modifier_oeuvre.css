@@ -1,0 +1,103 @@
+/* ===================================
+   MODIFIER ŒUVRE
+=================================== */
+
+.edit-work-main {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.edit-work-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 50px;
+    margin-bottom: 40px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        var(--arctic-blue),
+        var(--arctic-purple)
+    );
+
+    color: white;
+}
+
+.edit-work-form-section {
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.08);
+}
+
+.form-section {
+    margin-bottom: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    padding: 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.art-content {
+    padding: 25px;
+
+    margin-top: 20px;
+
+    border-radius: 20px;
+
+    background: #f7f9fc;
+}
+
+.form-actions {
+    display: flex;
+
+    gap: 20px;
+
+    justify-content: flex-end;
+}
+
+.price-field {
+    display: flex;
+    align-items: center;
+}
+
+.price-field span {
+    margin-left: 10px;
+
+    font-weight: bold;
+}

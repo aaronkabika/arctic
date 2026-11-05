@@ -1,0 +1,400 @@
+
+/* =========================================
+   ARCTIC — Modification du profil visiteur
+   ========================================= */
+
+.edit-profile-page {
+    --edit-terracotta: #bd6042;
+    --edit-ocre: #dda947;
+    --edit-green: #526b50;
+    --edit-indigo: #454c82;
+    --edit-cream: #fffaf1;
+    --edit-sand: #e8d8c3;
+    --edit-ink: #293c59;
+
+    min-height: 100vh;
+    margin: 0;
+    color: var(--edit-ink);
+    background:
+        radial-gradient(
+            circle at 8% 18%,
+            rgba(221, 169, 71, 0.16),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 92% 65%,
+            rgba(82, 107, 80, 0.13),
+            transparent 26%
+        ),
+        #f6f1e8;
+}
+
+/* Navigation */
+.edit-profile-page .navbar {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.edit-profile-page .logo {
+    color: var(--edit-indigo);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.edit-profile-page .nav-links a {
+    transition: color 0.2s ease;
+}
+
+.edit-profile-page .nav-links a:hover,
+.edit-profile-page .nav-links a.active {
+    color: var(--edit-terracotta);
+}
+
+/* Contenu principal */
+.edit-profile-page .page {
+    position: relative;
+    width: min(1000px, 92%);
+    margin: 55px auto 75px;
+    box-sizing: border-box;
+}
+
+/* Titre de la page */
+.edit-profile-page .page-title {
+    position: relative;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.edit-profile-page .page-title h1 {
+    margin-bottom: 12px;
+    color: var(--edit-indigo);
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -1px;
+}
+
+.edit-profile-page .page-title h1::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 5px;
+    margin: 18px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        var(--edit-terracotta) 0 33%,
+        var(--edit-ocre) 33% 66%,
+        var(--edit-green) 66% 100%
+    );
+}
+
+.edit-profile-page .page-title p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #66645e;
+    line-height: 1.7;
+}
+
+/* Carte principale */
+.edit-profile-page .profile-card {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(22px, 5vw, 48px);
+    border: 1px solid var(--edit-sand);
+    border-radius: 24px 10px 24px 10px;
+    background: var(--edit-cream);
+    box-shadow: 0 18px 50px rgba(41, 60, 89, 0.09);
+}
+
+/* Bande géométrique supérieure */
+.edit-profile-page .profile-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--edit-terracotta) 0 24px,
+        var(--edit-ocre) 24px 48px,
+        var(--edit-green) 48px 72px,
+        var(--edit-indigo) 72px 96px
+    );
+}
+
+/* Sections */
+.edit-profile-page .section {
+    margin: 0;
+}
+
+.edit-profile-page .section-title {
+    margin: 0 0 26px;
+    color: var(--edit-indigo);
+    font-size: 1.35rem;
+}
+
+.edit-profile-page .section-title::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 12px;
+    transform: rotate(45deg);
+    background: var(--edit-terracotta);
+}
+
+/* Champs du formulaire */
+.edit-profile-page .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.edit-profile-page .info-box {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    border: 1px solid #e7dccb;
+    border-radius: 14px 6px 14px 6px;
+    background: #fffdf8;
+}
+
+.edit-profile-page .info-label {
+    color: var(--edit-green);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.edit-profile-page input,
+.edit-profile-page select {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 13px;
+    box-sizing: border-box;
+    border: 1px solid #d9cbb8;
+    border-radius: 9px;
+    outline: none;
+    background: #ffffff;
+    color: var(--edit-ink);
+    font: inherit;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.edit-profile-page input:focus,
+.edit-profile-page select:focus {
+    border-color: var(--edit-indigo);
+    box-shadow: 0 0 0 3px rgba(69, 76, 130, 0.13);
+}
+
+.edit-profile-page input:focus-visible,
+.edit-profile-page select:focus-visible {
+    outline: 2px solid var(--edit-ocre);
+    outline-offset: 2px;
+}
+
+/* Boutons */
+.edit-profile-page .profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+    padding-top: 26px;
+    border-top: 1px solid var(--edit-sand);
+}
+
+.edit-profile-page .btn {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    border: 1px solid transparent;
+    border-radius: 10px 5px 10px 5px;
+    font: inherit;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.edit-profile-page .btn:hover {
+    transform: translateY(-2px);
+}
+
+.edit-profile-page .btn-primary {
+    background: var(--edit-indigo);
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(69, 76, 130, 0.18);
+}
+
+.edit-profile-page .btn-primary:hover {
+    background: #363d70;
+    box-shadow: 0 9px 20px rgba(69, 76, 130, 0.22);
+}
+
+.edit-profile-page .btn-secondary {
+    border-color: #d6c5ad;
+    background: #ffffff;
+    color: var(--edit-ink);
+}
+
+.edit-profile-page .btn-secondary:hover {
+    background: #f4eadb;
+}
+
+/* Pied de page */
+.edit-profile-page footer {
+    padding: 24px 16px;
+    color: #6b675e;
+    text-align: center;
+}
+
+/* Affichage mobile */
+@media (max-width: 650px) {
+    .edit-profile-page .page {
+        width: 94%;
+        margin: 32px auto 45px;
+    }
+
+    .edit-profile-page .profile-card {
+        padding: 24px 16px;
+    }
+
+    .edit-profile-page .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .edit-profile-page .profile-actions {
+        flex-direction: column;
+    }
+
+    .edit-profile-page .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .edit-profile-page *,
+    .edit-profile-page *::before,
+    .edit-profile-page *::after {
+        transition: none !important;
+    }
+}
+/* ==========================================
+   BARRE DE NAVIGATION — ARCTIC
+   ========================================== */
+
+.edit-profile-page header {
+    width: 100%;
+    background: #293c59;
+    border-bottom: 4px solid #c65d3a;
+    box-shadow: 0 4px 14px rgba(41, 60, 89, 0.12);
+}
+
+.edit-profile-page .navbar {
+    width: min(1200px, 92%);
+    min-height: 78px;
+    margin: 0 auto;
+    padding: 14px 0;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.edit-profile-page .navbar .logo {
+    color: #fffaf1;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.edit-profile-page .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.edit-profile-page .nav-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.edit-profile-page .nav-links a {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 22px;
+
+    color: #fffaf1;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.edit-profile-page .nav-links a:hover {
+    background: #e4b04a;
+    color: #293c59;
+    transform: translateY(-2px);
+}
+
+.edit-profile-page .nav-links a:focus-visible,
+.edit-profile-page .navbar .logo:focus-visible {
+    outline: 3px solid #e4b04a;
+    outline-offset: 4px;
+}
+
+/* Adaptation aux petits écrans */
+@media (max-width: 650px) {
+    .edit-profile-page .navbar {
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 18px 0;
+    }
+
+    .edit-profile-page .nav-links {
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .edit-profile-page .nav-links a {
+        padding: 9px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .edit-profile-page .nav-links a {
+        transition: none;
+    }
+
+    .edit-profile-page .nav-links a:hover {
+        transform: none;
+    }
+}

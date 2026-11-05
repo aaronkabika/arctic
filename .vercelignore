@@ -1,0 +1,55 @@
+# Fichiers à ignorer lors du déploiement Vercel
+
+# Base de données locale
+*.db
+*.db-journal
+*.db.backup*
+
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Uploads locaux (ne pas déployer sur Vercel)
+uploads/*
+!uploads/.gitkeep
+
+# Documentation
+CORRECTIONS.md
+CORRECTIONS_COMPLETES.md
+MIGRATION_STATUS.md
+GIT_SETUP_GUIDE.md
+README_UPGRADE.md
+DIAGNOSTIC_DB.md
+RAPPORT_OPTIMISATION_DB.md
+FEEDBACK_OPTIMISATION.md
+
+# Scripts de setup
+setup_git.bat
+setup_git.ps1
+connect_to_github.bat
+finish_github_setup.bat
+diagnostic.py
+migrate.py
+optimiser_db.py
+test_*.py
+verifier_fichiers.py
+
+# Git
+.git/
+.gitignore

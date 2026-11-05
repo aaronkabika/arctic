@@ -1,0 +1,617 @@
+/* ==============================
+   VARIABLES ARCTIC
+============================== */
+
+:root {
+    --arctic-gold: #FCB61C;
+    --arctic-orange: #FA663D;
+    --arctic-pink: #F1368B;
+    --arctic-purple: #B729DA;
+    --arctic-blue: #0A87F2;
+    --arctic-cyan: #24D4F2;
+    --arctic-deep-blue: #065FA6;
+    --arctic-green: #7CEC98;
+
+    --texte-fonce: #172033;
+    --texte-clair: #667085;
+    --blanc: #ffffff;
+    --fond: #f7f9fc;
+}
+
+
+/* ==============================
+   RESET
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fond);
+    color: var(--texte-fonce);
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(10, 135, 242, 0.12);
+
+    padding: 18px 6%;
+}
+
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* ==============================
+   LOGO
+============================== */
+
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+
+    background: linear-gradient(
+        90deg,
+        var(--arctic-blue),
+        var(--arctic-purple),
+        var(--arctic-pink),
+        var(--arctic-orange)
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+}
+
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--texte-fonce);
+    font-weight: 600;
+
+    position: relative;
+
+    transition: 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--arctic-blue);
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -7px;
+
+    width: 0;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--arctic-blue),
+        var(--arctic-pink)
+    );
+
+    transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: var(--arctic-blue);
+}
+
+
+/* ==============================
+   PAGE
+============================== */
+
+.page {
+    max-width: 1150px;
+    margin: 0 auto;
+
+    padding: 70px 6%;
+}
+
+
+/* ==============================
+   TITRE
+============================== */
+
+.page-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-title h1 {
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 900;
+
+    background: linear-gradient(
+        90deg,
+        var(--arctic-blue),
+        var(--arctic-purple),
+        var(--arctic-pink)
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    margin-bottom: 15px;
+}
+
+.page-title p {
+    color: var(--texte-clair);
+    font-size: 17px;
+}
+
+
+/* ==============================
+   CARTE DU PROFIL
+============================== */
+
+.profile-card {
+    position: relative;
+
+    background: var(--blanc);
+
+    border-radius: 30px;
+
+    padding: 45px;
+
+    box-shadow: 0 20px 60px rgba(6, 95, 166, 0.10);
+
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    background: var(--arctic-cyan);
+
+    opacity: 0.13;
+
+    top: -120px;
+    right: -70px;
+}
+
+.profile-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 40px;
+
+    background: var(--arctic-pink);
+
+    opacity: 0.08;
+
+    bottom: -90px;
+    left: -60px;
+
+    transform: rotate(30deg);
+}
+
+
+/* ==============================
+   EN-TÊTE DU PROFIL
+============================== */
+
+.profile-header {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+
+    padding-bottom: 35px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* ==============================
+   PHOTO DE PROFIL
+============================== */
+
+.profile-photo {
+    width: 130px;
+    height: 130px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 48px;
+    font-weight: 900;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        var(--arctic-blue),
+        var(--arctic-purple),
+        var(--arctic-pink)
+    );
+
+    box-shadow:
+        0 12px 30px rgba(10, 135, 242, 0.25);
+
+    border: 6px solid white;
+}
+
+
+/* ==============================
+   INFORMATIONS PRINCIPALES
+============================== */
+
+.profile-main-info h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.profile-main-info .status {
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background: rgba(36, 212, 242, 0.12);
+    color: var(--arctic-deep-blue);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 15px;
+}
+
+.profile-main-info p {
+    color: var(--texte-clair);
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   SECTIONS
+============================== */
+
+.section {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 40px;
+}
+
+.section-title {
+    font-size: 23px;
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title::before {
+    content: "";
+
+    width: 7px;
+    height: 28px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        var(--arctic-blue),
+        var(--arctic-pink)
+    );
+}
+
+
+/* ==============================
+   INFORMATIONS PERSONNELLES
+============================== */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.info-box {
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background: #f8fafc;
+
+    border: 1px solid #edf1f7;
+
+    transition: 0.25s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(10, 135, 242, 0.25);
+
+    box-shadow: 0 10px 25px rgba(6, 95, 166, 0.07);
+}
+
+.info-label {
+    display: block;
+
+    color: var(--texte-clair);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 7px;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* ==============================
+   PRÉFÉRENCES
+============================== */
+
+.preferences {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.preference {
+    padding: 10px 17px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    background: linear-gradient(
+        135deg,
+        rgba(10, 135, 242, 0.10),
+        rgba(183, 41, 218, 0.10)
+    );
+
+    color: var(--arctic-deep-blue);
+}
+
+
+/* ==============================
+   BOUTONS
+============================== */
+
+.profile-actions {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 45px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 170px;
+
+    padding: 14px 24px;
+
+    border-radius: 14px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: 0.25s ease;
+
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        var(--arctic-blue),
+        var(--arctic-purple)
+    );
+
+    box-shadow: 0 10px 25px rgba(10, 135, 242, 0.20);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 15px 30px rgba(10, 135, 242, 0.30);
+}
+
+.btn-secondary {
+    color: var(--arctic-deep-blue);
+
+    background: white;
+
+    border: 2px solid rgba(10, 135, 242, 0.20);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--arctic-blue);
+
+    background: rgba(10, 135, 242, 0.04);
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer {
+    margin-top: 40px;
+
+    padding: 30px 6%;
+
+    text-align: center;
+
+    color: var(--texte-clair);
+
+    font-size: 14px;
+}
+
+footer strong {
+    color: var(--arctic-blue);
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    .page {
+        padding-top: 45px;
+    }
+
+    .profile-card {
+        padding: 30px 22px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .nav-links {
+        font-size: 14px;
+    }
+
+    .profile-photo {
+        width: 105px;
+        height: 105px;
+
+        font-size: 38px;
+    }
+
+    .profile-main-info h2 {
+        font-size: 27px;
+    }
+
+    .profile-card {
+        border-radius: 22px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

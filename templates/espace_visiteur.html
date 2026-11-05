@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace visiteur - Arctic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="visitor-page" style="background: linear-gradient(135deg, #F0FDFA 0%, #F9FAFB 100%);">
+    
+    <!-- Motifs discrets -->
+    <div class="pattern-zen-rings" style="position: fixed; top: -100px; right: -100px; width: 400px; height: 400px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+
+    <!-- Navigation fond sombre -->
+    <header style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); position: sticky; top: 0; z-index: 1000;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1400px; margin: 0 auto;">
+            <a href="{{ url_for('accueil') }}" style="color: #FFFFFF; text-decoration: none; font-size: 1.5rem; font-weight: 700;">Arctic</a>
+            <nav style="display: flex; gap: 2rem; align-items: center;">
+                <a href="{{ url_for('accueil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Accueil</a>
+                <a href="{{ url_for('explorer') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Explorer</a>
+                <a href="{{ url_for('profil_visiteur') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon profil</a>
+                <a href="{{ url_for('deconnexion') }}" class="btn btn-outline" style="padding: 0.5rem 1.25rem; border-color: rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.9);">Déconnexion</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="position: relative; z-index: 1; padding: 2.5rem 1.5rem 4rem 1.5rem;">
+        
+        <div class="container" style="max-width: 1400px; margin: 0 auto;">
+
+            <!-- Hero Bienvenue - Taille moyenne -->
+            <section style="padding: 2.5rem; margin-bottom: 2.5rem; background: white; border-radius: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                <div class="avatar" style="width: 100px; height: 100px; background: linear-gradient(135deg, #14B8A6, #0D9488); display: flex; align-items: center; justify-content: center; font-size: 3rem; border-radius: 50%; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+                    👤
+                </div>
+                <div style="flex: 1;">
+                    <p style="font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.05em; color: #14B8A6; margin-bottom: 0.5rem; text-transform: uppercase;">UNIVERS ARCTIC</p>
+                    <h1 style="font-size: 2.25rem; font-weight: 700; color: #1F2937; margin-bottom: 0.75rem;">
+                        Bienvenue, <span style="color: #14B8A6;">{{ session["nom"] }}</span>
+                    </h1>
+                    <p style="color: #6B7280; font-size: 1rem; line-height: 1.6;">
+                        Découvrez des artistes, explorez leurs créations et laissez-vous transporter par leurs univers.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Recherche - Bloc moyen -->
+            <section style="padding: 2rem; margin-bottom: 2.5rem; background: white; border-radius: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <p style="font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.05em; color: #8B5CF6; margin-bottom: 0.5rem; text-transform: uppercase;">RECHERCHE</p>
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1F2937;">Trouvez une œuvre ou un artiste</h2>
+                </div>
+
+                <form method="get" action="{{ url_for('explorer') }}" style="max-width: 650px; margin: 0 auto;">
+                    <div style="position: relative; display: flex; align-items: center; background: #F9FAFB; border-radius: 50px; padding: 0.625rem 1.25rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); border: 2px solid #E5E5E5; transition: all 0.3s;">
+                        <span style="font-size: 1.25rem; color: #6B7280; margin-right: 0.875rem;">⌕</span>
+                        <input type="search" name="recherche" placeholder="Rechercher une œuvre ou un artiste..." style="flex: 1; border: none; outline: none; font-size: 0.9375rem; color: #1F2937; background: transparent;">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 30px; padding: 0.625rem 1.5rem; margin-left: 0.875rem; font-size: 0.9375rem;">Rechercher</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Catégories - Blocs moyens -->
+            <section style="margin-bottom: 2.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: #1F2937; margin-bottom: 1.5rem;">Quel art souhaitez-vous découvrir ?</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+                    
+                    <a href="{{ url_for('explorer', categorie='musique') }}" class="card card-interactive" style="text-decoration: none; padding: 1.5rem; position: relative; overflow: hidden;">
+                        <div class="pattern-zen-rings" style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; opacity: 0.05;"></div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.875rem; position: relative; z-index: 2;">♪</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem; position: relative; z-index: 2;">Musique</h3>
+                        <p style="color: #6B7280; line-height: 1.5; margin-bottom: 1rem; font-size: 0.9375rem; position: relative; z-index: 2;">Écoutez et découvrez les créations musicales des artistes.</p>
+                        <span style="color: #14B8A6; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 2; font-size: 0.9375rem;">Découvrir →</span>
+                    </a>
+
+                    <a href="{{ url_for('explorer', categorie='peinture') }}" class="card card-interactive" style="text-decoration: none; padding: 1.5rem; position: relative; overflow: hidden;">
+                        <div class="pattern-african-diamond" style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; opacity: 0.04;"></div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.875rem; position: relative; z-index: 2;">🎨</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem; position: relative; z-index: 2;">Peinture & dessin</h3>
+                        <p style="color: #6B7280; line-height: 1.5; margin-bottom: 1rem; font-size: 0.9375rem; position: relative; z-index: 2;">Explorez des œuvres visuelles et des univers colorés.</p>
+                        <span style="color: #D77A61; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 2; font-size: 0.9375rem;">Découvrir →</span>
+                    </a>
+
+                    <a href="{{ url_for('explorer', categorie='litterature') }}" class="card card-interactive" style="text-decoration: none; padding: 1.5rem; position: relative; overflow: hidden;">
+                        <div class="pattern-zen-garden" style="position: absolute; top: -25px; left: -25px; width: 110px; height: 110px; opacity: 0.05;"></div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.875rem; position: relative; z-index: 2;">✎</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem; position: relative; z-index: 2;">Littérature</h3>
+                        <p style="color: #6B7280; line-height: 1.5; margin-bottom: 1rem; font-size: 0.9375rem; position: relative; z-index: 2;">Découvrez des poèmes et créations littéraires originales.</p>
+                        <span style="color: #8B5CF6; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 2; font-size: 0.9375rem;">Découvrir →</span>
+                    </a>
+
+                    <a href="{{ url_for('explorer', categorie='sculpture') }}" class="card card-interactive" style="text-decoration: none; padding: 1.5rem; position: relative; overflow: hidden;">
+                        <div class="pattern-african-kente" style="position: absolute; bottom: -20px; right: -20px; width: 115px; height: 115px; opacity: 0.04;"></div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.875rem; position: relative; z-index: 2;">◇</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem; position: relative; z-index: 2;">Sculpture</h3>
+                        <p style="color: #6B7280; line-height: 1.5; margin-bottom: 1rem; font-size: 0.9375rem; position: relative; z-index: 2;">Découvrez des sculptures et créations en trois dimensions.</p>
+                        <span style="color: #92624F; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 2; font-size: 0.9375rem;">Découvrir →</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Œuvres à découvrir - Blocs verticaux moyens -->
+            <section style="margin-bottom: 2.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1F2937;">Des œuvres à découvrir</h2>
+                    <a href="{{ url_for('explorer') }}" class="btn btn-ghost" style="font-size: 0.9375rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        Voir toutes les œuvres →
+                    </a>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;">
+                    
+                    <a href="{{ url_for('explorer', categorie='peinture') }}" class="card card-interactive" style="text-decoration: none; padding: 0; overflow: hidden;">
+                        <div style="background: linear-gradient(135deg, #D77A61, #C55D47); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden;">
+                            <div class="pattern-african-diamond" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.08;"></div>
+                            <span style="position: relative; z-index: 2; color: white;">🎨</span>
+                        </div>
+                        <div style="padding: 1rem;">
+                            <p style="font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em; color: #D77A61; margin-bottom: 0.5rem; text-transform: uppercase;">PEINTURE</p>
+                            <h3 style="font-size: 1.0625rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem;">Une nouvelle histoire</h3>
+                            <span style="color: #8B5CF6; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">Découvrir l'œuvre →</span>
+                        </div>
+                    </a>
+
+                    <a href="{{ url_for('explorer', categorie='musique') }}" class="card card-interactive" style="text-decoration: none; padding: 0; overflow: hidden;">
+                        <div style="background: linear-gradient(135deg, #14B8A6, #0D9488); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden;">
+                            <div class="pattern-zen-rings" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1;"></div>
+                            <span style="position: relative; z-index: 2; color: white;">♪</span>
+                        </div>
+                        <div style="padding: 1rem;">
+                            <p style="font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em; color: #14B8A6; margin-bottom: 0.5rem; text-transform: uppercase;">MUSIQUE</p>
+                            <h3 style="font-size: 1.0625rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem;">Un univers sonore</h3>
+                            <span style="color: #8B5CF6; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">Découvrir l'œuvre →</span>
+                        </div>
+                    </a>
+
+                    <a href="{{ url_for('explorer', categorie='litterature') }}" class="card card-interactive" style="text-decoration: none; padding: 0; overflow: hidden;">
+                        <div style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden;">
+                            <div class="pattern-african-kente" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1;"></div>
+                            <span style="position: relative; z-index: 2; color: white;">✎</span>
+                        </div>
+                        <div style="padding: 1rem;">
+                            <p style="font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em; color: #8B5CF6; margin-bottom: 0.5rem; text-transform: uppercase;">LITTÉRATURE</p>
+                            <h3 style="font-size: 1.0625rem; font-weight: 700; color: #1F2937; margin-bottom: 0.625rem;">Des mots qui racontent</h3>
+                            <span style="color: #8B5CF6; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">Découvrir l'œuvre →</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer style="background: #1F2937; color: rgba(255, 255, 255, 0.8); padding: 2rem; text-align: center;">
+        <p style="margin: 0; font-size: 0.9375rem;">© 2026 Arctic — L'art mérite d'être découvert.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/arctic-ui.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

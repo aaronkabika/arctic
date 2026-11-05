@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inscription Artiste - Arctic</title>
+
+    <!-- Nouveau design system -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/patterns-extended.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body style="background: var(--surface-secondary); min-height: 100vh; position: relative; overflow-x: hidden;">
+
+    <!-- Formes décoratives africaines -->
+    <div class="decorative-shape shape-circle" 
+         style="width: 300px; height: 300px; top: -120px; right: -80px; opacity: 0.05; background: #FECACA;">
+    </div>
+    <div class="decorative-shape shape-square" 
+         style="width: 200px; height: 200px; bottom: -60px; left: -50px; opacity: 0.04; background: #E9D5FF;">
+    </div>
+    
+    <!-- Motif africain Kente en background -->
+    <div class="pattern-african-kente" 
+         style="position: fixed; inset: 0; opacity: 0.025; pointer-events: none;">
+    </div>
+
+    <!-- Header avec logo -->
+    <header class="text-center py-8" style="position: relative; z-index: 10;">
+        <a href="{{ url_for('accueil') }}" style="text-decoration: none;">
+            <h1 class="text-5xl font-black" 
+                style="background: linear-gradient(120deg, #D77A61, #C55D47); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Arctic
+            </h1>
+        </a>
+    </header>
+
+    <main class="container" style="max-width: 600px; position: relative; z-index: 10; padding-bottom: 4rem;">
+
+        <!-- Carte formulaire -->
+        <section class="card card-african" data-animate>
+
+            <!-- Titre -->
+            <div class="mb-8" style="text-align: center;">
+                <div class="mb-4" style="margin: 0 auto; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 2rem; background: linear-gradient(120deg, #D77A61, #C55D47);">
+                    🎨
+                </div>
+                
+                <h1 class="mb-3" style="font-size: 2rem; font-weight: 800; color: #1F2937;">
+                    Créer votre compte artiste
+                </h1>
+
+                <p style="color: #6B7280; font-size: 1.125rem;">
+                    Présentez votre univers artistique et partagez vos œuvres
+                    avec la communauté Arctic.
+                </p>
+            </div>
+
+            <form method="POST" action="{{ url_for('inscription_artiste') }}" id="form-inscription">
+
+                <!-- Nom -->
+                <div class="mb-6">
+                    <label for="nom" class="label" style="display: block; font-weight: 600; color: #1F2937; margin-bottom: 0.5rem;">
+                        Nom complet <span class="required" style="color: #D77A61;">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="nom"
+                        name="nom"
+                        class="input"
+                        placeholder="Votre nom d'artiste"
+                        required
+                    >
+                    <p id="aide-nom" aria-live="polite" class="help-text"></p>
+                </div>
+
+                <!-- Date de naissance -->
+                <div class="mb-6">
+                    <label for="date-naissance" class="label">
+                        Date de naissance <span class="required" style="color: var(--arctic-orange);">*</span>
+                    </label>
+                    <input
+                        type="date"
+                        id="date-naissance"
+                        name="date_naissance"
+                        class="input"
+                        required
+                    >
+                    <p id="aide-date-naissance" aria-live="polite" class="help-text"></p>
+                    <small class="help-text">Vous devez avoir au moins 18 ans</small>
+                </div>
+
+                <!-- Sexe -->
+                <div class="mb-6">
+                    <label for="sexe" class="label">
+                        Sexe <span class="required" style="color: var(--arctic-orange);">*</span>
+                    </label>
+                    <select id="sexe" name="sexe" class="input select" required>
+                        <option value="">Sélectionnez...</option>
+                        <option value="masculin">Masculin</option>
+                        <option value="feminin">Féminin</option>
+                    </select>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-6">
+                    <label for="email" class="label">
+                        Adresse e-mail <span class="required" style="color: var(--arctic-orange);">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="input"
+                        placeholder="votre@email.com"
+                        required
+                    >
+                    <p id="aide-email" aria-live="polite" class="help-text"></p>
+                    <small class="help-text">Visible publiquement pour vous contacter</small>
+                </div>
+
+                <!-- Téléphone -->
+                <div class="mb-6">
+                    <label for="telephone" class="label">
+                        Téléphone <span class="required" style="color: var(--arctic-orange);">*</span>
+                    </label>
+                    <div class="flex gap-2">
+                        <span class="btn btn-ghost" style="pointer-events: none; padding: var(--space-3) var(--space-4);">+243</span>
+                        <input
+                            type="tel"
+                            id="telephone"
+                            name="telephone"
+                            class="input"
+                            placeholder="XXXXXXXXX"
+                            style="flex: 1;"
+                            required
+                        >
+                    </div>
+                    <p id="aide-telephone" aria-live="polite" class="help-text"></p>
+                    <small class="help-text">9 chiffres, visible publiquement</small>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="mb-6">
+                    <label for="password" class="label">
+                        Mot de passe <span class="required" style="color: var(--arctic-orange);">*</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="input"
+                        placeholder="••••••••"
+                        required
+                    >
+                    <p id="aide-mot-de-passe" aria-live="polite" class="help-text"></p>
+                    <small class="help-text">8-20 caractères, majuscule, chiffre et caractère spécial</small>
+                    <!-- Indicateur de force ajouté automatiquement par arctic-ui.js -->
+                </div>
+
+                <!-- Confirmation mot de passe -->
+                <div class="mb-6">
+                    <label for="confirmation_password" class="label">
+                        Confirmation du mot de passe <span class="required" style="color: var(--arctic-orange);">*</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="confirmation_password"
+                        name="confirmation_password"
+                        class="input"
+                        placeholder="••••••••"
+                        required
+                    >
+                    <p id="aide-confirmation-mot-de-passe" aria-live="polite" class="help-text"></p>
+                </div>
+
+                <p id="message-inscription" role="alert" class="error-text mb-4"></p>
+
+                <!-- Bouton principal -->
+                <button type="submit" class="btn btn-earth btn-block btn-lg mb-4" style="background: linear-gradient(120deg, #92624F, #7A5243); padding: 0.875rem 2rem; width: 100%;">
+                    ✨ Créer mon compte artiste
+                </button>
+
+            </form>
+
+            <!-- Liens additionnels -->
+            <div class="text-center mt-8 pt-6" style="border-top: 1px solid var(--border-light);">
+                <p class="text-secondary mb-3">
+                    Vous avez déjà un compte ?
+                </p>
+                <a href="{{ url_for('connexion') }}" class="btn btn-outline btn-block mb-4">
+                    Se connecter
+                </a>
+                
+                <a href="{{ url_for('inscription') }}" class="btn btn-ghost btn-block">
+                    ← Retour au choix du type de compte
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/arctic-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ oeuvre["titre"] }} - Arctic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/details_oeuvre.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="artwork-details-page" style="background: linear-gradient(135deg, #F9FAFB 0%, #FBF8F3 100%);">
+
+    <!-- Motifs décoratifs -->
+    <div class="pattern-african-kente" style="position: fixed; top: -100px; right: -100px; width: 500px; height: 500px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+    <div class="pattern-zen-rings" style="position: fixed; bottom: -80px; left: -80px; width: 400px; height: 400px; opacity: 0.03; pointer-events: none; z-index: 0;"></div>
+
+    <header class="navbar" style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem;">
+            <a href="{{ url_for('accueil') }}" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">
+                Arctic
+            </a>
+
+            <nav style="display: flex; gap: 2rem; align-items: center;">
+                <a href="{{ url_for('accueil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Accueil</a>
+
+                {% if session.get("role") == "artiste" %}
+                    <a href="{{ url_for('mon_profil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon profil</a>
+                    <a href="{{ url_for('mes_oeuvres') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mes œuvres</a>
+                {% endif %}
+
+                <a href="{{ url_for('deconnexion') }}" class="btn btn-outline" style="padding: 0.5rem 1.5rem; border-color: rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.9);">Déconnexion</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="position: relative; z-index: 1; padding: 3rem 2rem 4rem 2rem;">
+
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+            <!-- Hero avec titre de l'œuvre -->
+            <div class="card card-african" style="padding: 2.5rem; margin-bottom: 2.5rem; position: relative; overflow: hidden;">
+                
+                <div class="pattern-african-diamond" style="position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; opacity: 0.04;"></div>
+
+                <div style="position: relative; z-index: 2;">
+                    <p style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; color: #8B5CF6; margin-bottom: 0.75rem; text-transform: uppercase;">🎨 GALERIE ARCTIC</p>
+
+                    <h1 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 2rem; background: linear-gradient(135deg, #8B5CF6, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        {{ oeuvre["titre"] }}
+                    </h1>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+
+                        <div style="padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Type d'art</small>
+                            <strong style="display: block; font-size: 1.125rem; color: var(--text-primary); margin-top: 0.5rem;">{{ oeuvre["type"] }}</strong>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Date de création</small>
+                            <strong style="display: block; font-size: 1.125rem; color: var(--text-primary); margin-top: 0.5rem;">{{ oeuvre["date_creation"] }}</strong>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #6B7280; letter-spacing: 0.05em;">Prix</small>
+                            <strong style="display: block; font-size: 1.25rem; color: #D77A61; margin-top: 0.5rem; font-weight: 700;">{{ "%.2f"|format(oeuvre["prix"]) }} $</strong>
+                        </div>
+
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--neutral-50); border-radius: 12px; border-left: 4px solid var(--primary-400);">
+                        <strong style="display: block; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; color: var(--text-primary); margin-bottom: 0.75rem;">Description</strong>
+                        <p style="margin: 0; color: var(--text-secondary); line-height: 1.7;">
+                            {{ oeuvre["description"] or "Aucune description fournie." }}
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Section Contenu de l'œuvre -->
+            <section class="card card-zen" style="padding: 3rem; margin-bottom: 3rem; position: relative; overflow: hidden;">
+
+                <div class="pattern-zen-garden" style="position: absolute; top: -30px; left: -30px; width: 180px; height: 180px; opacity: 0.06;"></div>
+
+                <div style="position: relative; z-index: 2;">
+                    <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem;">Contenu de l'œuvre</h2>
+
+                    {% if fichiers %}
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                            {% for fichier in fichiers %}
+
+                                <div style="padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+
+                                    {% if fichier["type_fichier"] == "image" %}
+
+                                        <img
+                                            src="{{ url_for('afficher_fichier_oeuvre', fichier_id=fichier['id']) }}"
+                                            alt="Image de {{ oeuvre['titre'] }}"
+                                            loading="lazy"
+                                            style="display: block; width: 100%; max-height: 400px; object-fit: contain; border-radius: 10px; margin-bottom: 1rem;">
+
+                                    {% elif fichier["type_fichier"] == "audio" %}
+
+                                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">🎵 Écouter l'œuvre</h3>
+
+                                        <audio controls controlsList="nodownload" style="width: 100%; margin-top: 1rem;">
+                                            <source src="{{ url_for('afficher_fichier_oeuvre', fichier_id=fichier['id']) }}">
+                                            Votre navigateur ne prend pas en charge la lecture audio.
+                                        </audio>
+
+                                    {% elif fichier["type_fichier"] == "document" %}
+
+                                        {% if session.get("role") == "artiste" %}
+
+                                            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">📖 Document littéraire</h3>
+
+                                            <a href="{{ url_for('afficher_fichier_oeuvre', fichier_id=fichier['id']) }}" class="btn btn-primary" style="display: inline-block; padding: 0.75rem 1.5rem;">
+                                                Ouvrir le document
+                                            </a>
+
+                                        {% else %}
+
+                                            <p style="color: var(--text-secondary); font-style: italic;">
+                                                Pour consulter ce document, veuillez contacter l'artiste.
+                                            </p>
+
+                                        {% endif %}
+
+                                    {% endif %}
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% else %}
+
+                        <p style="color: var(--text-secondary); text-align: center; padding: 3rem;">Aucun fichier n'est associé à cette œuvre.</p>
+
+                    {% endif %}
+                </div>
+
+            </section>
+
+            <!-- Section Contact Artiste -->
+            <section class="card" style="padding: 2.5rem; background: linear-gradient(120deg, #D77A61, #C55D47); color: white; margin-bottom: 2rem; position: relative; overflow: hidden;">
+
+                <div class="pattern-african-mudcloth" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.06;"></div>
+
+                <div style="position: relative; z-index: 2;">
+                    <h2 style="font-size: 1.75rem; font-weight: 700; color: white; margin-bottom: 1.5rem;">À propos de l'artiste</h2>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+
+                        <div>
+                            <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9); letter-spacing: 0.05em;">Nom</small>
+                            <strong style="display: block; font-size: 1.25rem; color: white; margin-top: 0.5rem;">{{ oeuvre["artiste_nom"] }}</strong>
+                        </div>
+
+                        <div>
+                            <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9); letter-spacing: 0.05em;">Téléphone</small>
+                            <strong style="display: block; font-size: 1.125rem; color: white; margin-top: 0.5rem;">
+                                {% if oeuvre["artiste_telephone"] %}
+                                    <a href="tel:{{ oeuvre['artiste_telephone'] }}" style="color: white; text-decoration: underline;">
+                                        {{ oeuvre["artiste_telephone"] }}
+                                    </a>
+                                {% else %}
+                                    Numéro non renseigné
+                                {% endif %}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    {% if session.get("role") == "visiteur" %}
+                        <a href="{{ url_for('profil_artiste', artiste_id=oeuvre['artiste_id']) }}" class="btn" style="background: white; color: #D77A61; padding: 0.75rem 1.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            Découvrir le profil de l'artiste →
+                        </a>
+                    {% endif %}
+                </div>
+
+            </section>
+
+            <!-- Navigation retour -->
+            <div style="text-align: center;">
+                {% if session.get("role") == "artiste" %}
+                    <a href="{{ url_for('mes_oeuvres') }}" class="btn btn-outline" style="padding: 0.875rem 2rem;">
+                        ← Retour à mes œuvres
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('accueil') }}" class="btn btn-outline" style="padding: 0.875rem 2rem;">
+                        ← Retour à l'accueil
+                    </a>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="footer" style="background: var(--neutral-900); color: var(--neutral-200); padding: 2.5rem 2rem; text-align: center; position: relative; z-index: 1;">
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9375rem;">© 2026 Arctic — L'art mérite d'être découvert.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/arctic-ui.js') }}" defer></script>
+
+</body>
+</html>

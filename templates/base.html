@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}Arctic - Plateforme d'art et de découverte pour artistes et visiteurs{% endblock %}">
+    <title>{% block title %}Arctic{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="{{ url_for('accueil') }}" class="logo-link">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Arctic">
+                </a>
+            </div>
+            
+            <div class="nav-center">
+                {% if session.get('utilisateur_id') %}
+                <a href="{{ url_for('explorer') }}" class="nav-link">Explorer</a>
+                {% if session.get('role') == 'artiste' %}
+                <a href="{{ url_for('mes_oeuvres') }}" class="nav-link">Mes œuvres</a>
+                <a href="{{ url_for('ajouter_oeuvre') }}" class="nav-link">Ajouter une œuvre</a>
+                {% endif %}
+                {% endif %}
+            </div>
+            
+            <div class="nav-right">
+                {% if session.get('utilisateur_id') %}
+                <span class="user-welcome">Bonjour, {{ session.get('nom') }}</span>
+                <a href="{{ url_for('espace') }}" class="nav-link">Mon espace</a>
+                <a href="{{ url_for('deconnexion') }}" class="nav-link btn-logout">Déconnexion</a>
+                {% else %}
+                <a href="{{ url_for('connexion') }}" class="nav-link">Connexion</a>
+                <a href="{{ url_for('inscription') }}" class="nav-link btn-primary">Inscription</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-container">
+            {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}" role="alert">
+                <span class="flash-icon">
+                    {% if category == 'success' %}✓{% elif category == 'error' %}✕{% elif category == 'warning' %}⚠{% else %}ℹ{% endif %}
+                </span>
+                <span class="flash-text">{{ message }}</span>
+                <button class="flash-close" onclick="this.parentElement.remove()">&times;</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Arctic</h3>
+                <p>Plateforme d'art et de découverte</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
+                    {% if session.get('utilisateur_id') %}
+                    <li><a href="{{ url_for('explorer') }}">Explorer</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('connexion') }}">Connexion</a></li>
+                    <li><a href="{{ url_for('inscription') }}">Inscription</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>À propos</h4>
+                <ul>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: contact@arctic.art</p>
+                <p>Téléphone: +243 000 000 000</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{ now().year }} Arctic. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+    
+    <script>
+        // Auto-hide flash messages après 5 secondes
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.opacity = '0';
+                    setTimeout(function() {
+                        message.remove();
+                    }, 300);
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

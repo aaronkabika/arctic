@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modifier mon profil artiste - Arctic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modifier_profil_visiteur.css') }}">
+</head>
+
+<body class="edit-profile-page" style="background: linear-gradient(135deg, #FCF5EA 0%, #FBF8F3 100%);">
+
+    <!-- Motifs africains décoratifs -->
+    <div class="pattern-african-kente" style="position: fixed; top: -120px; right: -120px; width: 550px; height: 550px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+    <div class="pattern-african-diamond" style="position: fixed; bottom: -100px; left: -100px; width: 450px; height: 450px; opacity: 0.03; pointer-events: none; z-index: 0;"></div>
+
+    <header class="navbar" style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem;">
+
+            <a href="{{ url_for('accueil') }}" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">
+                Arctic
+            </a>
+
+            <ul style="display: flex; gap: 2rem; align-items: center; list-style: none; margin: 0; padding: 0;">
+                <li>
+                    <a href="{{ url_for('accueil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Accueil</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('espace') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon espace</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('mes_oeuvres') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mes œuvres</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('mon_profil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon profil</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('deconnexion') }}" class="btn btn-outline" style="padding: 0.5rem 1.5rem; border-color: rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.9);">Déconnexion</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main class="page" style="position: relative; z-index: 1; padding: 3rem 2rem 4rem 2rem;">
+
+        <section class="hero" style="padding: 2.5rem 0; margin-bottom: 2.5rem; text-align: center;">
+
+            <div class="container" style="max-width: 800px; margin: 0 auto;">
+                <h1 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; background: linear-gradient(120deg, #D77A61, #C55D47); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Modifier mon profil artiste
+                </h1>
+
+                <p style="font-size: 1.125rem; color: #6B7280; line-height: 1.6;">
+                    Mettez à jour vos informations personnelles et professionnelles sur Arctic.
+                </p>
+            </div>
+            
+            <!-- Formes décoratives -->
+            <div class="decorative-shape shape-circle" style="position: absolute; top: 20%; right: 8%; width: 50px; height: 50px; background: #FECACA; opacity: 0.15;"></div>
+            <div class="decorative-shape shape-square" style="position: absolute; bottom: 15%; left: 10%; width: 40px; height: 40px; background: #FECACA; opacity: 0.15; transform: rotate(45deg);"></div>
+
+        </section>
+
+        <!-- Messages flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="container" style="max-width: 900px; margin: 0 auto 2rem auto;">
+                    {% for category, message in messages %}
+                        <div style="padding: 1rem 1.5rem; border-radius: 8px; margin-bottom: 1rem; {% if category == 'error' %}background: var(--error-100); color: var(--error-700); border-left: 4px solid var(--error-500);{% elif category == 'success' %}background: var(--success-100); color: var(--success-700); border-left: 4px solid var(--success-500);{% else %}background: var(--primary-100); color: var(--primary-700); border-left: 4px solid var(--primary-500);{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="container" style="max-width: 900px; margin: 0 auto;">
+
+            <section class="card card-african" style="padding: 3rem; position: relative; overflow: hidden;">
+
+                <div class="pattern-african-mudcloth" style="position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; opacity: 0.05;"></div>
+
+                <form method="POST"
+                      action="{{ url_for('modifier_profil_artiste') }}"
+                      id="form-modification-profil"
+                      style="position: relative; z-index: 2;">
+
+                    <section style="margin-bottom: 3rem;">
+
+                        <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--neutral-200);">
+                            Informations personnelles
+                        </h2>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+
+                            <div>
+                                <label class="label" for="nom" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Nom complet <span style="color: var(--error-500);">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nom"
+                                    name="nom"
+                                    value="{{ utilisateur.nom or '' }}"
+                                    required
+                                    maxlength="100"
+                                    autocomplete="name"
+                                    placeholder="Votre nom complet"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                                
+                                <small class="help-text" style="display: block; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                                    Ce nom sera affiché publiquement sur votre profil.
+                                </small>
+                            </div>
+
+                            <div>
+                                <label class="label" for="date_naissance" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Date de naissance <span style="color: var(--error-500);">*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="date_naissance"
+                                    name="date_naissance"
+                                    value="{{ utilisateur.date_naissance or '' }}"
+                                    required
+                                    max="{{ date_max }}"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                                
+                                <small class="help-text" style="display: block; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                                    Information privée (non visible publiquement).
+                                </small>
+                            </div>
+
+                            <div>
+                                <label class="label" for="sexe" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Sexe <span style="color: var(--error-500);">*</span>
+                                </label>
+
+                                <select id="sexe" name="sexe" required class="input" style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                                    <option value="">Sélectionnez...</option>
+
+                                    <option value="Homme"
+                                        {% if utilisateur.sexe == 'Homme' %}selected{% endif %}>
+                                        Homme
+                                    </option>
+
+                                    <option value="Femme"
+                                        {% if utilisateur.sexe == 'Femme' %}selected{% endif %}>
+                                        Femme
+                                    </option>
+
+                                    <option value="Autre"
+                                        {% if utilisateur.sexe == 'Autre' %}selected{% endif %}>
+                                        Autre
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="label" for="email" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Adresse e-mail <span style="color: var(--error-500);">*</span>
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value="{{ utilisateur.email or '' }}"
+                                    required
+                                    maxlength="254"
+                                    autocomplete="email"
+                                    placeholder="votre@email.com"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                                
+                                <small class="help-text" style="display: block; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                                    Visible publiquement pour que les visiteurs puissent vous contacter.
+                                </small>
+                            </div>
+
+                            <div>
+                                <label class="label" for="telephone" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Téléphone <span style="color: var(--error-500);">*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="telephone"
+                                    name="telephone"
+                                    value="{{ utilisateur.telephone or '' }}"
+                                    required
+                                    maxlength="30"
+                                    autocomplete="tel"
+                                    placeholder="+243 XX XXX XXXX"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                                
+                                <small class="help-text" style="display: block; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                                    Visible publiquement pour que les visiteurs puissent vous appeler.
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <div style="padding: 1.5rem; background: var(--warm-50); border-radius: 12px; border-left: 4px solid var(--warm-400); margin-bottom: 2rem;">
+                        <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">
+                            <strong style="color: var(--text-primary);">Note :</strong> Les champs marqués d'un <span style="color: var(--error-500);">*</span> sont obligatoires.
+                            Vos coordonnées (email et téléphone) seront visibles publiquement pour permettre aux visiteurs de vous contacter.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 1.5rem; justify-content: flex-end; padding-top: 2rem; border-top: 1px solid var(--neutral-200);">
+
+                        <a href="{{ url_for('mon_profil') }}"
+                           class="btn btn-outline"
+                           style="padding: 0.875rem 2rem;">
+                            ← Annuler
+                        </a>
+
+                        <button type="submit" class="btn btn-primary" style="padding: 0.875rem 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <span>💾</span> Enregistrer les modifications
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="footer" style="background: var(--neutral-900); color: var(--neutral-200); padding: 2.5rem 2rem; text-align: center; position: relative; z-index: 1;">
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9375rem;">
+                © 2026 <strong>Arctic</strong> — Donner une place aux artistes locaux.
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/arctic-ui.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+/* =========================================
+   ARCTIC — DESIGN DES PAGES D'ŒUVRES
+   Inspiration : motifs africains et zen
+   ========================================= */
+
+.artwork-details-page {
+    --arctic-blue: #243b70;
+    --arctic-teal: #078f87;
+    --arctic-orange: #ef783e;
+    --arctic-gold: #f0ba42;
+    --arctic-pink: #d84b91;
+    --arctic-purple: #7953c4;
+    --arctic-ink: #243047;
+
+    margin: 0;
+    min-height: 100vh;
+    color: var(--arctic-ink);
+    font-family: "Trebuchet MS", Arial, sans-serif;
+
+    /* Fond coloré : terre, lagon, soleil et lavande */
+    background-color: #faf3e8;
+    background-image:
+        radial-gradient(
+            circle at 8% 18%,
+            rgba(239, 120, 62, 0.35) 0,
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 94% 22%,
+            rgba(7, 143, 135, 0.30) 0,
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 8% 88%,
+            rgba(240, 186, 66, 0.34) 0,
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 94% 90%,
+            rgba(121, 83, 196, 0.25) 0,
+            transparent 24%
+        ),
+
+        /* Cercles zen : des anneaux harmonieux */
+        radial-gradient(
+            circle at 90% 35%,
+            transparent 0 65px,
+            rgba(7, 143, 135, 0.30) 66px 69px,
+            transparent 70px 88px,
+            rgba(216, 75, 145, 0.23) 89px 92px,
+            transparent 93px
+        ),
+
+        /* Lignes géométriques inspirées des textiles africains */
+        repeating-linear-gradient(
+            45deg,
+            transparent 0 24px,
+            rgba(239, 120, 62, 0.12) 24px 26px,
+            transparent 26px 48px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0 24px,
+            rgba(36, 59, 112, 0.10) 24px 26px,
+            transparent 26px 48px
+        );
+
+    background-attachment: fixed;
+    line-height: 1.65;
+}
+
+/* Navigation */
+
+.artwork-details-page .artist-header {
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom: 2px solid rgba(7, 143, 135, 0.20);
+    box-shadow: 0 5px 25px rgba(36, 48, 71, 0.06);
+}
+
+.artwork-details-page .artist-logo span,
+.artwork-details-page .artist-logo a {
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.artwork-details-page .artist-nav a {
+    transition: color 0.2s ease;
+}
+
+.artwork-details-page .artist-nav a:hover {
+    color: var(--arctic-orange);
+}
+
+/* Grande carte centrale */
+
+.artwork-details-page .details-container {
+    position: relative;
+    isolation: isolate;
+    width: min(1180px, 90%);
+    margin: 65px auto;
+    padding: clamp(24px, 5vw, 58px);
+
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 32px;
+
+    box-shadow:
+        0 25px 70px rgba(36, 48, 71, 0.12),
+        0 0 0 5px rgba(255, 255, 255, 0.22);
+
+    overflow: hidden;
+}
+
+/* Ligne multicolore au sommet de la carte */
+
+.artwork-details-page .details-container::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+
+    background: linear-gradient(
+        90deg,
+        var(--arctic-orange),
+        var(--arctic-gold),
+        var(--arctic-teal),
+        var(--arctic-blue),
+        var(--arctic-purple),
+        var(--arctic-pink)
+    );
+}
+
+/* Petit titre d'introduction */
+
+.artwork-details-page .details-container > p:first-of-type {
+    display: inline-block;
+    margin: 8px 0 12px;
+    padding: 6px 14px;
+
+    color: var(--arctic-teal);
+    background: rgba(7, 143, 135, 0.09);
+    border-radius: 30px;
+
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+/* Titre de l'œuvre */
+
+.artwork-details-page .details-container > h1 {
+    margin: 10px 0 28px;
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -1px;
+
+    background: linear-gradient(
+        100deg,
+        var(--arctic-blue),
+        var(--arctic-teal),
+        var(--arctic-purple),
+        var(--arctic-pink)
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Informations présentées comme des bandeaux colorés */
+
+.artwork-details-page .details-container > p:not(:first-of-type) {
+    margin: 13px 0;
+    padding: 13px 18px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(7, 143, 135, 0.07),
+        rgba(255, 255, 255, 0.8)
+    );
+
+    border-left: 4px solid var(--arctic-teal);
+    border-radius: 0 13px 13px 0;
+    overflow-wrap: anywhere;
+}
+
+.artwork-details-page .details-container > p:nth-of-type(3) {
+    border-left-color: var(--arctic-pink);
+    background: linear-gradient(
+        90deg,
+        rgba(216, 75, 145, 0.08),
+        rgba(255, 255, 255, 0.8)
+    );
+}
+
+.artwork-details-page .details-container > p:nth-of-type(4) {
+    border-left-color: var(--arctic-purple);
+}
+
+.artwork-details-page .details-container > p:nth-of-type(5) {
+    border-left-color: var(--arctic-orange);
+}
+
+.artwork-details-page .details-container strong {
+    color: var(--arctic-blue);
+}
+
+/* Section consacrée au contenu artistique */
+
+.artwork-details-page .details-content {
+    position: relative;
+    margin-top: 38px;
+    padding: clamp(18px, 3vw, 34px);
+
+    background:
+        radial-gradient(
+            circle at 100% 0,
+            rgba(121, 83, 196, 0.12),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #f2f8ff,
+            #f0fbf6 52%,
+            #fff4f7
+        );
+
+    border: 1px solid rgba(7, 143, 135, 0.17);
+    border-radius: 25px;
+}
+
+/* Titres soulignés par une ligne dégradée */
+
+.artwork-details-page .details-content h2 {
+    position: relative;
+    margin: 0 0 25px;
+    padding-bottom: 14px;
+
+    color: var(--arctic-blue);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.artwork-details-page .details-content h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 105px;
+    height: 5px;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--arctic-orange),
+        var(--arctic-gold),
+        var(--arctic-teal),
+        var(--arctic-purple)
+    );
+}
+
+/* Disposition des fichiers */
+
+.artwork-details-page .details-files {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 250px), 1fr)
+    );
+    gap: 22px;
+}
+
+.artwork-details-page .details-file {
+    min-width: 0;
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(36, 59, 112, 0.10);
+    border-top: 4px solid var(--arctic-teal);
+    border-radius: 18px;
+
+    box-shadow: 0 8px 24px rgba(36, 48, 71, 0.06);
+    overflow-wrap: anywhere;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.artwork-details-page .details-file:nth-child(3n + 2) {
+    border-top-color: var(--arctic-orange);
+}
+
+.artwork-details-page .details-file:nth-child(3n) {
+    border-top-color: var(--arctic-purple);
+}
+
+.artwork-details-page .details-file:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(36, 48, 71, 0.11);
+}
+
+.artwork-details-page .details-file h3 {
+    margin-top: 0;
+    color: var(--arctic-blue);
+}
+
+/* Images : l'œuvre reste au centre */
+
+.artwork-details-page .details-file img {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: contain;
+
+    border-radius: 12px;
+    background: #f7f3ee;
+}
+
+/* Lecteur audio */
+
+.artwork-details-page .details-file audio {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 14px;
+    accent-color: var(--arctic-teal);
+}
+
+/* Liens dans les cartes */
+
+.artwork-details-page .details-file a {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--arctic-blue);
+    font-weight: 800;
+    text-underline-offset: 4px;
+}
+
+.artwork-details-page .details-file a:hover {
+    color: var(--arctic-pink);
+}
+
+/* Retour à la galerie */
+
+.artwork-details-page .details-back {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 12px 21px;
+
+    color: white;
+    background: linear-gradient(
+        110deg,
+        var(--arctic-blue),
+        var(--arctic-teal)
+    );
+
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 800;
+
+    box-shadow: 0 7px 18px rgba(7, 143, 135, 0.18);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.artwork-details-page .details-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 11px 25px rgba(7, 143, 135, 0.25);
+}
+
+/* Pied de page */
+
+.artwork-details-page .artist-footer {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.72);
+    border-top: 1px solid rgba(7, 143, 135, 0.17);
+}
+
+/* Adaptation aux petits écrans */
+
+@media (max-width: 650px) {
+    .artwork-details-page .details-container {
+        width: 94%;
+        margin: 28px auto;
+        padding: 24px 18px;
+        border-radius: 22px;
+    }
+
+    .artwork-details-page .details-content {
+        padding: 18px 13px;
+        border-radius: 18px;
+    }
+
+    .artwork-details-page .details-file {
+        padding: 14px;
+    }
+
+    .artwork-details-page .details-container > p:not(:first-of-type) {
+        padding: 12px;
+    }
+}
+
+/* Respect des préférences d'accessibilité */
+
+@media (prefers-reduced-motion: reduce) {
+    .artwork-details-page *,
+    .artwork-details-page *::before,
+    .artwork-details-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
+
+/* ==========================================
+   MOTIFS AFRICAINS & ZEN — ARCTIC
+   ========================================== */
+
+/* Couleurs décoratives */
+:root {
+    --africa-terracotta: #c65d3a;
+    --africa-ocre: #e4b04a;
+    --africa-red: #a83f35;
+    --africa-green: #456b50;
+    --africa-indigo: #454c82;
+    --zen-cream: #fffaf1;
+    --zen-sand: #eadcc8;
+    --zen-ink: #293c59;
+}
+
+/* La carte devient un support décoratif */
+.artist-works-preview .work-card {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--zen-cream);
+    border: 1px solid #d7a77f;
+    border-radius: 26px 8px 26px 8px;
+}
+
+/* Motifs géométriques superposés dans le coin inférieur droit */
+.artist-works-preview .work-card::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: 12px;
+    bottom: 12px;
+    width: 112px;
+    height: 112px;
+    pointer-events: none;
+    opacity: 0.8;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            transparent 0 7px,
+            rgba(198, 93, 58, 0.65) 7px 9px,
+            transparent 9px 15px
+        );
+
+    clip-path: polygon(
+        50% 0,
+        61% 25%,
+        100% 25%,
+        75% 50%,
+        100% 75%,
+        61% 75%,
+        50% 100%,
+        39% 75%,
+        0 75%,
+        25% 50%,
+        0 25%,
+        39% 25%
+    );
+}
+
+/* Bande décorative multicolore en haut de chaque carte */
+.artist-works-preview .work-card {
+    border-top: 4px solid transparent;
+    border-image: linear-gradient(
+        90deg,
+        #c65d3a,
+        #e4b04a,
+        #456b50,
+        #454c82,
+        #c65d3a
+    ) 1;
+}
+
+/* Cercles zen et lignes concentriques */
+.artist-works-preview .work-card h3 {
+    position: relative;
+    color: var(--zen-ink);
+}
+
+.artist-works-preview .work-card h3::before {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--africa-terracotta) 0 35%,
+        var(--africa-ocre) 35% 65%,
+        var(--africa-green) 65% 100%
+    );
+}
+
+/* Petit accent coloré sous les descriptions */
+.artist-works-preview .work-card p {
+    position: relative;
+    color: #62645d;
+}
+
+/* Cadre graphique discret autour des images */
+.artist-works-preview .work-card .work-image {
+    border-bottom: 4px solid var(--africa-ocre);
+}
+
+/* Motifs moins imposants sur les petits écrans */
+@media (max-width: 600px) {
+    .artist-works-preview .work-card::after {
+        width: 76px;
+        height: 76px;
+        right: 8px;
+        bottom: 8px;
+        opacity: 0.45;
+    }
+}

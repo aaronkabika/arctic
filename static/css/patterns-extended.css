@@ -1,0 +1,435 @@
+/* ==========================================
+   ARCTIC EXTENDED PATTERNS
+   Motifs africains et zen supplémentaires
+   ========================================== */
+
+/* =========================
+   MOTIFS AFRICAINS AVANCÉS
+   ========================= */
+
+/* Motif Kente (Ghana) - Bandes horizontales colorées */
+.pattern-african-kente {
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            var(--africa-terracotta) 0px,
+            var(--africa-terracotta) 3px,
+            var(--africa-ochre) 3px,
+            var(--africa-ochre) 6px,
+            var(--africa-green) 6px,
+            var(--africa-green) 9px,
+            var(--africa-indigo) 9px,
+            var(--africa-indigo) 12px,
+            var(--africa-terracotta) 12px,
+            var(--africa-terracotta) 20px,
+            transparent 20px,
+            transparent 25px
+        );
+}
+
+/* Motif Mudcloth (Mali) - Lignes et points */
+.pattern-african-mudcloth {
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 15px,
+            rgba(198, 93, 58, 0.15) 15px,
+            rgba(198, 93, 58, 0.15) 17px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 15px,
+            rgba(139, 90, 60, 0.15) 15px,
+            rgba(139, 90, 60, 0.15) 17px
+        ),
+        radial-gradient(
+            circle at 8px 8px,
+            rgba(198, 93, 58, 0.2) 2px,
+            transparent 2px
+        );
+    background-size: 30px 30px, 30px 30px, 16px 16px;
+}
+
+/* Motif Adinkra (Ghana) - Symboles géométriques */
+.pattern-african-adinkra-symbol {
+    background-image: 
+        repeating-conic-gradient(
+            from 45deg at 50% 50%,
+            transparent 0deg,
+            transparent 85deg,
+            rgba(228, 176, 74, 0.12) 85deg,
+            rgba(228, 176, 74, 0.12) 95deg
+        );
+}
+
+/* Motif Bogolan - Spirales et formes organiques */
+.pattern-african-bogolan {
+    background-image: 
+        radial-gradient(
+            circle at 20% 30%,
+            transparent 5px,
+            rgba(198, 93, 58, 0.08) 5px,
+            rgba(198, 93, 58, 0.08) 7px,
+            transparent 7px,
+            transparent 15px,
+            rgba(139, 90, 60, 0.08) 15px,
+            rgba(139, 90, 60, 0.08) 17px,
+            transparent 17px
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            transparent 8px,
+            rgba(228, 176, 74, 0.08) 8px,
+            rgba(228, 176, 74, 0.08) 10px,
+            transparent 10px,
+            transparent 20px,
+            rgba(198, 93, 58, 0.08) 20px,
+            rgba(198, 93, 58, 0.08) 22px,
+            transparent 22px
+        );
+    background-size: 100px 100px, 120px 120px;
+}
+
+/* Motif Zèbre - Rayures africaines */
+.pattern-african-zebra {
+    background-image: 
+        repeating-linear-gradient(
+            -25deg,
+            transparent 0,
+            transparent 12px,
+            rgba(42, 42, 42, 0.06) 12px,
+            rgba(42, 42, 42, 0.06) 18px,
+            transparent 18px,
+            transparent 30px,
+            rgba(42, 42, 42, 0.04) 30px,
+            rgba(42, 42, 42, 0.04) 35px
+        );
+}
+
+/* Motif Baoulé (Côte d'Ivoire) - Masques stylisés */
+.pattern-african-baoule {
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent 0,
+            transparent 20px,
+            rgba(198, 93, 58, 0.05) 20px,
+            rgba(198, 93, 58, 0.05) 22px,
+            transparent 22px,
+            transparent 40px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0,
+            transparent 20px,
+            rgba(228, 176, 74, 0.05) 20px,
+            rgba(228, 176, 74, 0.05) 22px,
+            transparent 22px,
+            transparent 40px
+        );
+}
+
+/* =========================
+   MOTIFS ZEN AVANCÉS
+   ========================= */
+
+/* Jardin zen - Lignes ondulées */
+.pattern-zen-garden {
+    background-image: 
+        repeating-linear-gradient(
+            180deg,
+            transparent 0,
+            transparent 15px,
+            rgba(41, 60, 89, 0.03) 15px,
+            rgba(41, 60, 89, 0.03) 17px
+        ),
+        repeating-radial-gradient(
+            circle at 0 0,
+            transparent 0,
+            transparent 25px,
+            rgba(41, 60, 89, 0.02) 25px,
+            rgba(41, 60, 89, 0.02) 27px,
+            transparent 27px,
+            transparent 50px
+        );
+}
+
+/* Pierre zen empilées */
+.pattern-zen-stones {
+    background-image: 
+        radial-gradient(
+            ellipse at 30% 40%,
+            rgba(173, 181, 189, 0.08) 0,
+            rgba(173, 181, 189, 0.08) 15px,
+            transparent 15px,
+            transparent 30px,
+            rgba(173, 181, 189, 0.05) 30px,
+            rgba(173, 181, 189, 0.05) 40px,
+            transparent 40px
+        ),
+        radial-gradient(
+            ellipse at 70% 60%,
+            rgba(173, 181, 189, 0.08) 0,
+            rgba(173, 181, 189, 0.08) 20px,
+            transparent 20px,
+            transparent 35px,
+            rgba(173, 181, 189, 0.05) 35px,
+            rgba(173, 181, 189, 0.05) 50px,
+            transparent 50px
+        );
+    background-size: 150px 150px, 180px 180px;
+}
+
+/* Bambou zen */
+.pattern-zen-bamboo {
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 28px,
+            rgba(69, 107, 80, 0.04) 28px,
+            rgba(69, 107, 80, 0.04) 32px,
+            transparent 32px,
+            transparent 35px,
+            rgba(69, 107, 80, 0.06) 35px,
+            rgba(69, 107, 80, 0.06) 37px,
+            transparent 37px,
+            transparent 40px,
+            rgba(69, 107, 80, 0.04) 40px,
+            rgba(69, 107, 80, 0.04) 44px
+        );
+}
+
+/* Vagues zen (enso) */
+.pattern-zen-waves-advanced {
+    background-image: 
+        radial-gradient(
+            circle at 25% 50%,
+            transparent 0,
+            transparent 30px,
+            rgba(41, 60, 89, 0.03) 30px,
+            rgba(41, 60, 89, 0.03) 32px,
+            transparent 32px,
+            transparent 60px,
+            rgba(41, 60, 89, 0.02) 60px,
+            rgba(41, 60, 89, 0.02) 62px,
+            transparent 62px
+        ),
+        radial-gradient(
+            circle at 75% 50%,
+            transparent 0,
+            transparent 30px,
+            rgba(41, 60, 89, 0.03) 30px,
+            rgba(41, 60, 89, 0.03) 32px,
+            transparent 32px,
+            transparent 60px,
+            rgba(41, 60, 89, 0.02) 60px,
+            rgba(41, 60, 89, 0.02) 62px,
+            transparent 62px
+        );
+    background-size: 200px 100px;
+}
+
+/* Mandala zen */
+.pattern-zen-mandala {
+    background-image: 
+        repeating-conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0deg,
+            rgba(41, 60, 89, 0.04) 10deg,
+            transparent 20deg,
+            transparent 40deg,
+            rgba(41, 60, 89, 0.02) 50deg,
+            transparent 60deg
+        );
+}
+
+/* Sable zen - Texture */
+.pattern-zen-sand {
+    background-image: 
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(234, 220, 200, 0.3) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at 60% 70%,
+            rgba(234, 220, 200, 0.25) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(234, 220, 200, 0.2) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at 40% 80%,
+            rgba(234, 220, 200, 0.25) 1px,
+            transparent 1px
+        );
+    background-size: 4px 4px, 5px 5px, 3px 3px, 6px 6px;
+}
+
+/* =========================
+   OVERLAYS DÉCORATIFS
+   ========================= */
+
+/* Overlay africain - Combinaison */
+.overlay-african-full {
+    position: relative;
+}
+
+.overlay-african-full::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        var(--pattern-african-stripes),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(228, 176, 74, 0.08) 0,
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(198, 93, 58, 0.08) 0,
+            transparent 40%
+        );
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Overlay zen - Combinaison */
+.overlay-zen-full {
+    position: relative;
+}
+
+.overlay-zen-full::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        var(--pattern-zen-rings),
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(41, 60, 89, 0.06) 0,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(173, 181, 189, 0.06) 0,
+            transparent 50%
+        );
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* =========================
+   BORDURES DÉCORATIVES
+   ========================= */
+
+/* Bordure africaine multicolore */
+.border-african {
+    border: 4px solid transparent;
+    border-image: linear-gradient(
+        45deg,
+        var(--africa-terracotta) 0%,
+        var(--africa-ochre) 25%,
+        var(--africa-green) 50%,
+        var(--africa-indigo) 75%,
+        var(--africa-terracotta) 100%
+    ) 1;
+}
+
+/* Bordure zen - Simple et épurée */
+.border-zen {
+    border: 2px solid rgba(41, 60, 89, 0.15);
+    position: relative;
+}
+
+.border-zen::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(41, 60, 89, 0.3) 50%,
+        transparent 100%
+    );
+}
+
+/* =========================
+   CLASSES UTILITAIRES
+   ========================= */
+
+/* Appliquer un motif en background */
+.bg-pattern-african {
+    background-color: var(--zen-cream);
+    background-blend-mode: multiply;
+}
+
+.bg-pattern-zen {
+    background-color: var(--zen-sand);
+    background-blend-mode: soft-light;
+}
+
+/* Overlay avec opacité contrôlée */
+.pattern-overlay-light { opacity: 0.3; }
+.pattern-overlay-medium { opacity: 0.5; }
+.pattern-overlay-strong { opacity: 0.7; }
+
+/* =========================
+   ANIMATIONS DE MOTIFS
+   ========================= */
+
+@keyframes pattern-slide {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100px 100px;
+    }
+}
+
+.pattern-animated {
+    animation: pattern-slide 30s linear infinite;
+}
+
+@keyframes pattern-pulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.pattern-pulse {
+    animation: pattern-pulse 4s ease-in-out infinite;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+    /* Réduire la complexité des motifs sur mobile */
+    .pattern-african-mudcloth,
+    .pattern-african-bogolan,
+    .pattern-zen-stones {
+        opacity: 0.3;
+    }
+    
+    .pattern-animated {
+        animation: none;
+    }
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modifier mon profil - Arctic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modifier_profil_visiteur.css') }}">
+</head>
+
+<body class="edit-profile-page" style="background: linear-gradient(135deg, #F0F4FA 0%, #E8F5E9 100%);">
+
+    <!-- Motifs zen décoratifs -->
+    <div class="pattern-zen-garden" style="position: fixed; top: -120px; left: -120px; width: 550px; height: 550px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+    <div class="pattern-zen-rings" style="position: fixed; bottom: -100px; right: -100px; width: 450px; height: 450px; opacity: 0.03; pointer-events: none; z-index: 0;"></div>
+
+    <header class="navbar" style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem;">
+
+            <a href="{{ url_for('accueil') }}" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">
+                Arctic
+            </a>
+
+            <ul style="display: flex; gap: 2rem; align-items: center; list-style: none; margin: 0; padding: 0;">
+                <li>
+                    <a href="{{ url_for('accueil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Accueil</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('explorer') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Explorer</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('profil_visiteur') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon profil</a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('deconnexion') }}" class="btn btn-outline" style="padding: 0.5rem 1.5rem; border-color: rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.9);">Déconnexion</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main class="page" style="position: relative; z-index: 1; padding: 3rem 2rem 4rem 2rem;">
+
+        <section class="hero" style="padding: 2.5rem 0; margin-bottom: 2.5rem; text-align: center;">
+
+            <div class="container" style="max-width: 800px; margin: 0 auto;">
+                <h1 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; background: linear-gradient(120deg, #14B8A6, #2DD4BF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Modifier mon profil
+                </h1>
+
+                <p style="font-size: 1.125rem; color: #6B7280; line-height: 1.6;">
+                    Mettez à jour vos informations personnelles sur Arctic.
+                </p>
+            </div>
+            
+            <!-- Formes décoratives -->
+            <div class="decorative-shape shape-circle" style="position: absolute; top: 20%; right: 8%; width: 50px; height: 50px; background: #BAE6FD; opacity: 0.15;"></div>
+            <div class="decorative-shape shape-square" style="position: absolute; bottom: 15%; left: 10%; width: 40px; height: 40px; background: #BAE6FD; opacity: 0.12; transform: rotate(45deg);"></div>
+
+        </section>
+
+        <div class="container" style="max-width: 900px; margin: 0 auto;">
+
+            <section class="card card-zen" style="padding: 3rem; position: relative; overflow: hidden;">
+
+                <div class="pattern-zen-stones" style="position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; opacity: 0.05;"></div>
+
+                <form method="POST"
+                      action="{{ url_for('modifier_profil_visiteur') }}"
+                      style="position: relative; z-index: 2;">
+
+                    <section style="margin-bottom: 3rem;">
+
+                        <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--neutral-200);">
+                            Informations personnelles
+                        </h2>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+
+                            <div>
+                                <label class="label" for="nom" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Nom complet
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nom"
+                                    name="nom"
+                                    value="{{ utilisateur.nom or '' }}"
+                                    required
+                                    maxlength="100"
+                                    autocomplete="name"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                            </div>
+
+                            <div>
+                                <label class="label" for="date_naissance" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Date de naissance
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="date_naissance"
+                                    name="date_naissance"
+                                    value="{{ utilisateur.date_naissance or '' }}"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                            </div>
+
+                            <div>
+                                <label class="label" for="sexe" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Sexe
+                                </label>
+
+                                <select id="sexe" name="sexe" class="input" style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                                    <option value="">Non renseigné</option>
+
+                                    <option value="Homme"
+                                        {% if utilisateur.sexe == 'Homme' %}selected{% endif %}>
+                                        Homme
+                                    </option>
+
+                                    <option value="Femme"
+                                        {% if utilisateur.sexe == 'Femme' %}selected{% endif %}>
+                                        Femme
+                                    </option>
+
+                                    <option value="Autre"
+                                        {% if utilisateur.sexe == 'Autre' %}selected{% endif %}>
+                                        Autre
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="label" for="email" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Adresse e-mail
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value="{{ utilisateur.email or '' }}"
+                                    required
+                                    maxlength="254"
+                                    autocomplete="email"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                            </div>
+
+                            <div>
+                                <label class="label" for="telephone" style="display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                    Téléphone
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="telephone"
+                                    name="telephone"
+                                    value="{{ utilisateur.telephone or '' }}"
+                                    maxlength="30"
+                                    autocomplete="tel"
+                                    class="input"
+                                    style="width: 100%; padding: 0.875rem 1.25rem; border: 2px solid var(--neutral-300); border-radius: 8px; font-size: 1rem; transition: all 0.3s;">
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <div style="display: flex; gap: 1.5rem; justify-content: flex-end; padding-top: 2rem; border-top: 1px solid var(--neutral-200);">
+
+                        <a href="{{ url_for('profil_visiteur') }}"
+                           class="btn btn-outline"
+                           style="padding: 0.875rem 2rem;">
+                            Annuler
+                        </a>
+
+                        <button type="submit" class="btn btn-primary" style="padding: 0.875rem 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <span>💾</span> Enregistrer les modifications
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="footer" style="background: var(--neutral-900); color: var(--neutral-200); padding: 2.5rem 2rem; text-align: center; position: relative; z-index: 1;">
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9375rem;">
+                © 2026 <strong>Arctic</strong> — Donner une place aux artistes locaux.
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/arctic-ui.js') }}" defer></script>
+
+</body>
+</html>

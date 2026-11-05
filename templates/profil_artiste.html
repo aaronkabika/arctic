@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profil artiste - Arctic</title>
+    <meta name="description" content="Découvrez le profil, l'univers artistique, les œuvres et les moyens de contact d'un artiste sur Arctic.">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="artist-profile-page" style="background: linear-gradient(135deg, #FCF5EA 0%, #F9FAFB 100%);">
+
+    <!-- Motifs africains décoratifs -->
+    <div class="pattern-african-kente" style="position: fixed; top: -100px; right: -100px; width: 500px; height: 500px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+    <div class="pattern-zen-rings" style="position: fixed; bottom: -80px; left: -80px; width: 400px; height: 400px; opacity: 0.03; pointer-events: none; z-index: 0;"></div>
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+
+    <header class="navbar" style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem;">
+            <a class="navbar-brand" href="{{ url_for('accueil') }}" aria-label="Arctic — Accueil" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">
+                Arctic
+            </a>
+
+            <nav aria-label="Navigation principale" style="display: flex; gap: 2rem; align-items: center;">
+                <a href="{{ url_for('accueil') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Accueil</a>
+                <a href="{{ url_for('explorer') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Explorer</a>
+                <a href="{{ url_for('espace') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon espace</a>
+
+                {% if mode == "prive" %}
+                    <a href="{{ url_for('mon_profil') }}" aria-current="page" style="color: #D77A61; text-decoration: none; font-weight: 600; border-bottom: 2px solid #D77A61;">Mon profil</a>
+                {% else %}
+                    <a href="{{ url_for('profil_visiteur') }}" style="color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: 500; transition: color 0.3s;">Mon profil</a>
+                {% endif %}
+
+                <a href="{{ url_for('deconnexion') }}" class="btn btn-outline" style="padding: 0.5rem 1.5rem; border-color: rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.9);">Déconnexion</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         CONTENU PRINCIPAL
+         ========================= -->
+
+    <main style="position: relative; z-index: 1; padding-top: 2rem;">
+
+
+        <!-- =========================
+             HERO PROFIL
+             ========================= -->
+
+        <section class="hero" aria-labelledby="artist-profile-name" style="padding: 2.5rem 2rem; margin-bottom: 3rem; position: relative; overflow: hidden; background: linear-gradient(120deg, #D77A61, #C55D47);">
+            
+            <div class="pattern-african-diamond" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05;"></div>
+
+            <div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2.5rem; position: relative; z-index: 2;">
+
+                <div class="avatar" style="width: 100px; height: 100px; background: white; display: flex; align-items: center; justify-content: center; font-size: 3rem; border-radius: 50%; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" aria-hidden="true">
+                    👤
+                </div>
+
+                <div style="flex: 1;">
+                    <p style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(255,255,255,0.9); margin-bottom: 0.75rem; text-transform: uppercase;">🎨 ARTISTE ARCTIC</p>
+
+                    <h1 id="artist-profile-name" style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; color: white;">
+                        {{ artiste["nom"] }}
+                    </h1>
+
+                    <p style="font-size: 1.125rem; color: rgba(255,255,255,0.95); line-height: 1.6; margin-bottom: 1.5rem;">
+                         Découvrez les créations et les informations publiées par cet artiste sur Arctic.
+                    </p>
+
+                    {% if mode == "prive" %}
+                    <div>
+                        <a href="{{ url_for('modifier_profil_artiste') }}" class="btn" style="background: white; color: #D77A61; padding: 0.75rem 1.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <span>✏️</span> Modifier mon profil
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- Formes décoratives -->
+            <div class="decorative-shape shape-circle" style="position: absolute; bottom: 10%; right: 8%; width: 60px; height: 60px; background: rgba(255,255,255,0.1);"></div>
+        </section>
+
+
+        <!-- =========================
+             CONTENU DU PROFIL
+             ========================= -->
+
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem 2rem;">
+
+
+            <!-- =========================
+                 À PROPOS
+                 ========================= -->
+
+            <section class="card card-african" aria-labelledby="artist-about-title" style="padding: 3rem; margin-bottom: 3rem; position: relative; overflow: hidden;">
+
+                <div class="pattern-african-mudcloth" style="position: absolute; bottom: -40px; right: -40px; width: 200px; height: 200px; opacity: 0.05;"></div>
+
+                <div style="position: relative; z-index: 2;">
+                    <p style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; color: var(--warm-500); margin-bottom: 0.5rem; text-transform: uppercase;">L'ARTISTE</p>
+
+                    <h2 id="artist-about-title" style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem;">
+                        À propos de l'artiste
+                    </h2>
+
+                    <div style="padding: 2rem; background: var(--neutral-50); border-radius: 12px; border-left: 4px solid var(--warm-400);">
+                        <p style="color: var(--text-secondary); line-height: 1.6; font-style: italic;">
+                            La biographie de cet artiste n'est pas encore renseignée.
+                        </p> 
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 INFORMATIONS
+                 ========================= -->
+
+            <section class="card card-zen" aria-labelledby="artist-information-title" style="padding: 3rem; margin-bottom: 3rem; position: relative; overflow: hidden;">
+
+                <div class="pattern-zen-garden" style="position: absolute; top: -30px; left: -30px; width: 180px; height: 180px; opacity: 0.06;"></div>
+
+                <div style="position: relative; z-index: 2;">
+                    <p style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; color: var(--cool-500); margin-bottom: 0.5rem; text-transform: uppercase;">INFORMATIONS</p>
+
+                    <h2 id="artist-information-title" style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem;">
+                        Identité
+                    </h2>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+
+                        <!-- NOM -->
+                        <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <span style="font-size: 2rem;" aria-hidden="true">👤</span>
+                            <div>
+                                <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Nom</small>
+                                <strong style="display: block; font-size: 1.125rem; color: var(--text-primary); margin-top: 0.25rem;">{{ artiste["nom"] }}</strong>
+                            </div>
+                        </div>
+
+                        <!-- DATE DE NAISSANCE (privé seulement) -->
+                        {% if mode == "prive" %}
+                        <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <span style="font-size: 2rem;" aria-hidden="true">📅</span>
+                            <div>
+                                <small style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Date de naissance</small>
+                                <strong style="display: block; font-size: 1.125rem; color: var(--text-primary); margin-top: 0.25rem;">{{ artiste["date_naissance"] or "Non renseignée" }}</strong>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ŒUVRES
+                 ========================= -->
+
+            <section aria-labelledby="artist-works-title" style="margin-bottom: 4rem;">
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+
+                    <div>
+                        <p style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; color: var(--primary-500); margin-bottom: 0.5rem; text-transform: uppercase;">✨ CRÉATIONS</p>
+                        <h2 id="artist-works-title" style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">
+                            Les œuvres de l'artiste
+                        </h2>
+                    </div>
+
+                    <span class="badge" style="background: var(--primary-100); color: var(--primary-700); padding: 0.625rem 1.25rem; border-radius: 25px; font-size: 1rem; font-weight: 700;">
+                        {{ oeuvres|length }} œuvre{% if oeuvres|length != 1 %}s{% endif %}
+                    </span>
+
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;">
+
+                    {% if oeuvres %}
+
+                        {% for oeuvre in oeuvres %}
+
+                            <article class="card card-interactive" style="padding: 0; overflow: hidden; position: relative;">
+
+                                <div style="height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; background: {{ ['linear-gradient(135deg, #8B5CF6, #A78BFA)', 'linear-gradient(120deg, #D77A61, #C55D47)', 'linear-gradient(120deg, #14B8A6, #2DD4BF)', 'linear-gradient(120deg, #92624F, #7A5243)'][loop.index0 % 4] }}; position: relative; overflow: hidden;">
+                                   
+                                   {% if oeuvre["type"]|lower == "musique" %}
+                                       <div class="pattern-zen-rings" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.15;"></div>
+                                       <span style="position: relative; z-index: 2;">🎵</span>
+                                   {% elif oeuvre["type"]|lower == "sculpture" %}
+                                       <div class="pattern-african-mudcloth" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.12;"></div>
+                                       <span style="position: relative; z-index: 2;">🗿</span>
+                                   {% elif oeuvre["type"]|lower == "litterature" %}
+                                       <div class="pattern-zen-garden" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1;"></div>
+                                       <span style="position: relative; z-index: 2;">📖</span>
+                                   {% else %}
+                                       <div class="pattern-african-kente" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.13;"></div>
+                                       <span style="position: relative; z-index: 2;">🎨</span>
+                                   {% endif %}
+
+                                    <span class="badge" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.95); color: var(--text-primary); padding: 0.375rem 0.875rem; font-size: 0.75rem; font-weight: 600; border-radius: 20px; text-transform: uppercase;">
+                                        {{ oeuvre["type"] or "Œuvre" }}
+                                    </span>
+
+                                </div>
+
+                                <div style="padding: 1.5rem;">
+
+                                   <h3 style="font-size: 1.375rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">{{ oeuvre["titre"] }}</h3>
+
+                                   <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                                       {{ oeuvre["description"] or "Aucune description fournie." }}
+                                   </p>
+
+                                   <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--neutral-200);">
+
+                                       <strong style="font-size: 1.25rem; font-weight: 700; color: var(--warm-500);">
+                                           {% if oeuvre["prix"] is not none %}
+                                               {{ "%.2f"|format(oeuvre["prix"]) }} $
+                                           {% else %}
+                                               Prix non renseigné
+                                           {% endif %}
+                                        </strong>
+
+                                        <a href="{{ url_for('details_oeuvre', oeuvre_id=oeuvre['id']) }}" class="btn btn-ghost" style="padding: 0.5rem 1.25rem;">
+                                            Voir →
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary); font-size: 1.125rem;">
+                            Cet artiste n'a pas encore publié d'œuvres.
+                        </p>
+
+                    {% endif %}
+
+                 </div>
+
+                
+            </section>
+
+
+            <!-- =========================
+                 CONTACT
+                 ========================= -->
+
+            <section class="card" aria-labelledby="artist-contact-title" style="padding: 3rem; background: var(--gradient-primary); color: white; text-align: center; position: relative; overflow: hidden;">
+
+                <div class="pattern-zen-stones" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1;"></div>
+
+                <div style="position: relative; z-index: 2; max-width: 700px; margin: 0 auto;">
+
+                    <p style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(255,255,255,0.9); margin-bottom: 0.75rem; text-transform: uppercase;">💌 INTÉRESSÉ PAR SON ART ?</p>
+
+                    <h2 id="artist-contact-title" style="font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 1.5rem;">
+                        Contactez l'artiste
+                    </h2>
+
+                    <span style="font-size: 1.125rem; color: rgba(255,255,255,0.95); line-height: 1.6; display: block; margin-bottom: 2.5rem;">
+                        Pour acheter une œuvre ou obtenir plus d'informations, contactez directement l'artiste.
+                    </span>
+
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+
+                        {% if artiste["telephone"] %}
+                            <a href="tel:{{ artiste['telephone']|replace(' ', '')|replace('-', '') }}" class="btn" style="background: white; color: var(--primary-600); padding: 0.875rem 2rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <span>📞</span> Appeler {{ artiste["telephone"] }}
+                            </a>
+                        {% else %}
+                            <span class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 0.875rem 2rem; font-weight: 600; cursor: not-allowed;">
+                                Téléphone non renseigné
+                            </span>
+                        {% endif %}
+
+
+                        {% if artiste["email"] %}
+                            <a href="mailto:{{ artiste['email'] }}" class="btn" style="background: white; color: var(--primary-600); padding: 0.875rem 2rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <span>✉️</span> Envoyer un e-mail
+                            </a>
+                        {% else %}
+                            <span class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 0.875rem 2rem; font-weight: 600; cursor: not-allowed;">
+                                Adresse e-mail non renseignée
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer class="footer" style="background: var(--neutral-900); color: var(--neutral-200); padding: 2.5rem 2rem; text-align: center; position: relative; z-index: 1;">
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9375rem;">
+                © 2026 Arctic — L'art mérite d'être découvert.
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/arctic-ui.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+</body>
+</html>

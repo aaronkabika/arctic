@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Accès interdit - Arctic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arctic-modern.css') }}">
+</head>
+
+<body style="background: linear-gradient(135deg, #FCF5EA 0%, #FBF8F3 100%); min-height: 100vh; display: flex; flex-direction: column;">
+
+    <!-- Motifs africains décoratifs -->
+    <div class="pattern-african-diamond" style="position: fixed; top: -100px; right: -100px; width: 500px; height: 500px; opacity: 0.025; pointer-events: none; z-index: 0;"></div>
+    <div class="pattern-zen-rings" style="position: fixed; bottom: -80px; left: -80px; width: 400px; height: 400px; opacity: 0.03; pointer-events: none; z-index: 0;"></div>
+
+    <header class="navbar" style="background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem;">
+            <a href="{{ url_for('accueil') }}" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #FFFFFF;">
+                Arctic
+            </a>
+        </div>
+    </header>
+
+    <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; position: relative; z-index: 1;">
+        
+        <div class="card card-african" style="max-width: 600px; padding: 4rem 3rem; text-align: center; position: relative; overflow: hidden;">
+            
+            <div class="pattern-african-kente" style="position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; opacity: 0.04;"></div>
+
+            <div style="position: relative; z-index: 2;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem;">🚫</div>
+
+                <h1 style="font-size: 3.5rem; font-weight: 800; background: linear-gradient(120deg, #D77A61, #C55D47); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                    403
+                </h1>
+
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: #1F2937; margin-bottom: 1.5rem;">
+                    Accès interdit
+                </h2>
+
+                <p style="color: #6B7280; font-size: 1.125rem; line-height: 1.6; margin-bottom: 2rem;">
+                    Vous n'avez pas l'autorisation d'accéder à cette page. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter un administrateur.
+                </p>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="{{ url_for('accueil') }}" class="btn btn-primary" style="padding: 0.875rem 2rem;">
+                        ← Retour à l'accueil
+                    </a>
+                    <a href="javascript:history.back()" class="btn btn-outline" style="padding: 0.875rem 2rem;">
+                        Page précédente
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="footer" style="background: var(--neutral-900); color: var(--neutral-200); padding: 2rem; text-align: center; position: relative; z-index: 1;">
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9375rem;">© 2026 Arctic — L'art mérite d'être découvert.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
