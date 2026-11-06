@@ -40,7 +40,11 @@ if not app.secret_key:
 app.config["DATABASE"] = os.path.join(app.root_path, "arctic.db")
 
 # Configuration des fichiers uploadés
-app.config["UPLOAD_FOLDER"] = os.path.join(app.root_path, "uploads")
+# Sur Vercel, utiliser /tmp car le système de fichiers est en lecture seule
+if os.environ.get("VERCEL"):
+    app.config["UPLOAD_FOLDER"] = "/tmp/uploads"
+else:
+    app.config["UPLOAD_FOLDER"] = os.path.join(app.root_path, "uploads")
 app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024  # 25 Mo max
 
 # Configuration de la session
@@ -53,7 +57,11 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
 app.config["ITEMS_PER_PAGE"] = 12
 
 # Créer le dossier uploads s'il n'existe pas
-os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+try:
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+except OSError:
+    # Sur Vercel, ignorer l'erreur si le dossier ne peut pas être créé
+    pass
 
 # Configuration du logging
 logging.basicConfig(
