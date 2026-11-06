@@ -35,9 +35,16 @@ except Exception as e:
     print(f"❌ Erreur connexion SQLite : {e}")
     exit(1)
 
-# Connexion PostgreSQL
+# Connexion PostgreSQL avec SSL
 try:
-    postgres_conn = psycopg2.connect(POSTGRES_URL)
+    # Ajouter sslmode=require pour Neon
+    postgres_url_with_ssl = POSTGRES_URL
+    if '?' not in postgres_url_with_ssl:
+        postgres_url_with_ssl += '?sslmode=require'
+    elif 'sslmode' not in postgres_url_with_ssl:
+        postgres_url_with_ssl += '&sslmode=require'
+    
+    postgres_conn = psycopg2.connect(postgres_url_with_ssl)
     postgres_cursor = postgres_conn.cursor()
     print("✅ Connexion PostgreSQL établie")
 except Exception as e:
