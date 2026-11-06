@@ -2,26 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "wsgi.py",
+      "src": "api/index.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/uploads/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "wsgi.py"
+      "dest": "api/index.py"
     }
-  ],
-  "env": {
-    "FLASK_ENV": "production",
-    "PYTHONUNBUFFERED": "1"
-  }
+  ]
 }
