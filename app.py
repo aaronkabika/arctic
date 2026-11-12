@@ -13,7 +13,6 @@ from flask import (
 
 from datetime import datetime, date, timedelta
 import re
-import sqlite3
 import os
 import uuid
 import math
@@ -22,6 +21,9 @@ import logging
 from functools import wraps
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
+
+# Importer le module database pour PostgreSQL/SQLite
+from database import get_db_connection, get_db_cursor, execute_query
 
 # ==============================
 # CONFIGURATION DE L'APPLICATION
